@@ -1,0 +1,17 @@
+{
+  "kode": "resend",
+  "version": "1.0.0",
+  "frameworks": ["nextjs"],
+  "files": [
+    { "src": "lib/email/resend.ts", "dest": "lib/email/resend.ts" },
+    { "src": "app/api/email/send/route.ts", "dest": "app/api/email/send/route.ts" }
+  ],
+  "env": ["RESEND_API_KEY", "RESEND_FROM_EMAIL"],
+  "setup": "SETUP-FRAGMENT.md",
+  "removal": {
+    "files": ["lib/email/resend.ts", "app/api/email/send/route.ts"],
+    "env": ["RESEND_API_KEY", "RESEND_FROM_EMAIL"],
+    "stepsFile": "REMOVE.md"
+  },
+  "conflicts": []
+}
