@@ -7,9 +7,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * Controller Resend — STAGED untuk dukungan Laravel (aktif di v1.1.0).
+ * Controller Resend — disuntik Scaffdev Builder ke template Laravel.
  *
- * NOTED — daftarkan route manual saat v1.1.0 rilis:
+ * NOTED — daftarkan route manual (mis. di routes/api.php):
  *   Route::post('/api/email/send', [ResendController::class, 'send']);
  * TODO pemilik project: auth + rate-limit agar tidak dipakai spam.
  */

@@ -7,7 +7,7 @@ Disuntik via `scaff ... --with=resend` (CLI 0.2.0+).
 | Framework | Status | Isi |
 |---|---|---|
 | Next.js | ✅ v1.0.0 | Client kirim email + route (idempotency-aware) |
-| Laravel | 🟡 STAGED (v1.1.0) | Service + Controller sudah ditulis, belum disuntik CLI |
+| Laravel | ✅ v1.0.0 | Service + Controller (HTTP client) |
 
 ## Struktur
 
@@ -19,7 +19,7 @@ scaff-modul-resend/
 ├── nextjs/
 │   ├── lib/email/resend.ts
 │   └── app/api/email/send/route.ts
-└── laravel/                 ← STAGED untuk v1.1.0
+└── laravel/                 ← sumber untuk base Laravel
     ├── app/Services/ResendService.php
     └── app/Http/Controllers/ResendController.php
 ```

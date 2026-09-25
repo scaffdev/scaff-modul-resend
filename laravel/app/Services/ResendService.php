@@ -5,10 +5,10 @@ namespace App\Services;
 use Illuminate\Support\Facades\Http;
 
 /**
- * Service Resend — STAGED untuk dukungan Laravel (aktif di v1.1.0).
+ * Service Resend — disuntik Scaffdev Builder ke template Laravel.
  *
  * NOTED:
- * - File ini BELUM disuntik CLI (manifest v1.0.0 frameworks: ["nextjs"]).
+ * - File ini 100% milik modul "resend" (lihat scaff.integration.json).
  * - REST langsung 1:1 docs (tanpa SDK): POST https://api.resend.com/emails,
  *   header "Authorization: Bearer re_xxx".
  *   Ref: https://resend.com/docs/api-reference/emails/send-email

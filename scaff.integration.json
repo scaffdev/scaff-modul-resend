@@ -1,15 +1,17 @@
 {
   "kode": "resend",
   "version": "1.0.0",
-  "frameworks": ["nextjs"],
+  "frameworks": ["nextjs", "laravel"],
   "files": [
-    { "src": "lib/email/resend.ts", "dest": "lib/email/resend.ts" },
-    { "src": "app/api/email/send/route.ts", "dest": "app/api/email/send/route.ts" }
+    { "src": "lib/email/resend.ts", "dest": "lib/email/resend.ts", "frameworks": ["nextjs"] },
+    { "src": "app/api/email/send/route.ts", "dest": "app/api/email/send/route.ts", "frameworks": ["nextjs"] },
+    { "src": "app/Services/ResendService.php", "dest": "app/Services/ResendService.php", "frameworks": ["laravel"] },
+    { "src": "app/Http/Controllers/ResendController.php", "dest": "app/Http/Controllers/ResendController.php", "frameworks": ["laravel"] }
   ],
   "env": ["RESEND_API_KEY", "RESEND_FROM_EMAIL"],
   "setup": "SETUP-FRAGMENT.md",
   "removal": {
-    "files": ["lib/email/resend.ts", "app/api/email/send/route.ts"],
+    "files": ["lib/email/resend.ts", "app/api/email/send/route.ts", "app/Services/ResendService.php", "app/Http/Controllers/ResendController.php"],
     "env": ["RESEND_API_KEY", "RESEND_FROM_EMAIL"],
     "stepsFile": "REMOVE.md"
   },

@@ -32,3 +32,37 @@ RESEND_FROM_EMAIL=onboarding@resend.dev   # ganti domain sendiri saat produksi
 
 NOTED: `idempotencyKey` WAJIB unik per email logis (contoh di atas per order).
 Tanpa ini, retry webhook payment bisa mengirim struk dobel ke customer.
+
+---
+
+## Setup Laravel (base Laravel)
+
+> CLI menyuntik Service + Controller; 3 langkah manual di bawah wajib
+> karena tidak bisa di-generate otomatis. Tanpa SDK tambahan.
+
+### L1. Isi `.env`
+
+```bash
+RESEND_API_KEY=re_xxxx          # rahasia! server saja
+RESEND_FROM_EMAIL=onboarding@resend.dev   # ganti domain sendiri saat produksi
+```
+
+### L2. Tambah ke `config/services.php`
+
+```php
+'resend' => [
+    'api_key' => env('RESEND_API_KEY'),
+    'from_email' => env('RESEND_FROM_EMAIL'),
+],
+```
+
+### L3. Daftarkan route (mis. di `routes/api.php`)
+
+```php
+use App\Http\Controllers\ResendController;
+
+Route::post('/api/email/send', [ResendController::class, 'send']);
+```
+
+Lalu `php artisan config:clear`. Untuk email order SELALU kirim
+`idempotencyKey` unik per order. Batasi auth + rate-limit (TODO di controller).
