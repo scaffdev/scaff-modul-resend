@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendEmail } from "../../../../../lib/email/resend";
+import { sendEmail } from "../../../../lib/email/resend";
 
 /**
  * POST /api/email/send — kirim email transaksional via Resend.
@@ -29,6 +29,11 @@ export async function POST(req: Request) {
 
   if (!strArr(b.to)) {
     return NextResponse.json({ error: "to wajib string/array string (max 50)" }, { status: 400 });
+  }
+  // NOTED: kontrak resmi to: string|string[] — tiap alamat wajib format email.
+  const toList = Array.isArray(b.to) ? b.to : [b.to];
+  if (!toList.every((x) => typeof x === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x))) {
+    return NextResponse.json({ error: "to wajib email valid (string/array email)" }, { status: 400 });
   }
   if (!str(b.subject)?.trim()) {
     return NextResponse.json({ error: "subject wajib diisi" }, { status: 400 });

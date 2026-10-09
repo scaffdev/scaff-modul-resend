@@ -28,9 +28,20 @@ class ResendController extends Controller
             'text' => 'nullable|string',
             'cc' => 'nullable',
             'bcc' => 'nullable',
-            'replyTo' => 'nullable|string|max:255',
+            'replyTo' => 'nullable',
             'idempotencyKey' => 'nullable|string|max:255',
         ]);
+        // NOTED: 'to' boleh string ATAU array (kontrak resmi reply_to/to: string|string[]).
+        $toList = is_array($data['to']) ? $data['to'] : [$data['to']];
+        foreach ($toList as $addr) {
+            abort_if(!is_string($addr) || !filter_var($addr, FILTER_VALIDATE_EMAIL), 422, 'to wajib email valid (string/array email)');
+        }
+        if (isset($data['replyTo'])) {
+            $rtList = is_array($data['replyTo']) ? $data['replyTo'] : [$data['replyTo']];
+            foreach ($rtList as $addr) {
+                abort_if(!is_string($addr) || !filter_var($addr, FILTER_VALIDATE_EMAIL), 422, 'replyTo wajib email valid (string/array email)');
+            }
+        }
         abort_if(empty($data['html']) && empty($data['text']), 422, 'html atau text wajib diisi salah satu');
 
         $result = $this->resend->send($data);

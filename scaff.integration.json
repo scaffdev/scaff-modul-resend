@@ -1,6 +1,7 @@
 {
   "kode": "resend",
   "version": "1.0.0",
+  "docsUrl": "https://resend.com/docs/api-reference/emails/send-email",
   "frameworks": ["nextjs", "laravel"],
   "files": [
     { "src": "lib/email/resend.ts", "dest": "lib/email/resend.ts", "frameworks": ["nextjs"] },
