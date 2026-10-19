@@ -1,7 +1,7 @@
 ## Setup Resend (digabung otomatis ke SETUP.md)
 
 > 3 langkah, ±5 menit. Gratis 100 email/hari + 3.000/bulan.
-> Docs resmi: https://resend.com/docs/send-with-nodejs
+> Docs resmi: https://resend.com/docs/api-reference/emails/send-email
 
 ### 1. Ambil API Key
 
@@ -32,6 +32,7 @@ RESEND_FROM_EMAIL=onboarding@resend.dev   # ganti domain sendiri saat produksi
 
 NOTED: `idempotencyKey` WAJIB unik per email logis (contoh di atas per order).
 Tanpa ini, retry webhook payment bisa mengirim struk dobel ke customer.
+Header `Idempotency-Key` berlaku **24 jam** dan maksimal **256 karakter**.
 
 ---
 
@@ -61,7 +62,8 @@ RESEND_FROM_EMAIL=onboarding@resend.dev   # ganti domain sendiri saat produksi
 ```php
 use App\Http\Controllers\ResendController;
 
-Route::post('/api/email/send', [ResendController::class, 'send']);
+// routes/api.php otomatis berprefix /api — jangan tulis /api lagi di sini.
+Route::post('/email/send', [ResendController::class, 'send']);
 ```
 
 Lalu `php artisan config:clear`. Untuk email order SELALU kirim

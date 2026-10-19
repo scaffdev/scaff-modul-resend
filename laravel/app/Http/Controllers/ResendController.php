@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 /**
  * Controller Resend — disuntik Scaffdev Builder ke template Laravel.
  *
- * NOTED — daftarkan route manual (mis. di routes/api.php):
- *   Route::post('/api/email/send', [ResendController::class, 'send']);
+ * NOTED — daftarkan route manual (mis. di routes/api.php; prefix /api otomatis):
+ *   Route::post('/email/send', [ResendController::class, 'send']);
  * TODO pemilik project: auth + rate-limit agar tidak dipakai spam.
  */
 class ResendController extends Controller
